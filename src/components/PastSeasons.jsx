@@ -117,7 +117,7 @@ export default function PastSeasons({ seasons }) {
   return (
     <div className="mt-12">
       <div className="flex items-center gap-3 mb-5">
-        <h2 className="text-lg font-bold text-white">Past Seasons</h2>
+        <h2 className="text-lg font-bold text-white">Past Parlays</h2>
         <div
           className="px-2 py-0.5 rounded text-xs font-medium"
           style={{ backgroundColor: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.4)' }}

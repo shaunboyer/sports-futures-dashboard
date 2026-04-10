@@ -43,7 +43,7 @@ export default function WinTotalCard({ bet, betData }) {
     <div
       className="rounded-2xl overflow-hidden flex flex-col"
       style={{
-        background: '#141b27',
+        background: '#1a2236',
         border: '1px solid rgba(255,255,255,0.07)',
       }}
     >

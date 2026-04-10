@@ -32,7 +32,7 @@ export default function Header({ lastUpdated, onRefresh, loading }) {
         {/* Right side */}
         <div className="flex items-center gap-5">
           {timeStr && (
-            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <span className="hidden sm:inline text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
               Updated {timeStr}
             </span>
           )}

@@ -68,7 +68,7 @@ export default function OverallPerformance({ currentSeason, pastSeasons }) {
           border: '1px solid rgba(255,255,255,0.07)',
         }}
       >
-        <div className="flex items-stretch">
+        <div className="grid grid-cols-2 md:flex md:items-stretch gap-y-6 md:gap-y-0">
           <StatBlock
             icon={<Target size={15} />}
             label="Record"
@@ -105,22 +105,6 @@ export default function OverallPerformance({ currentSeason, pastSeasons }) {
           />
         </div>
 
-        {/* Active caveat */}
-        {active > 0 && (
-          <p
-            className="text-xs mt-5 pt-4"
-            style={{
-              borderTop: '1px solid rgba(255,255,255,0.05)',
-              color: 'rgba(255,255,255,0.25)',
-            }}
-          >
-            Net P&L treats the active ${currentSeason.parlay.wagered} {currentSeason.label} wager as spent. If the parlay hits, net jumps to{' '}
-            <span style={{ color: 'rgba(255,255,255,0.45)' }}>
-              +${(netPL + currentSeason.parlay.toWin).toLocaleString()}
-            </span>
-            .
-          </p>
-        )}
       </div>
     </div>
   )
@@ -128,7 +112,7 @@ export default function OverallPerformance({ currentSeason, pastSeasons }) {
 
 function StatBlock({ icon, label, value, sub, legRecord, valueColor = '#f1f5f9', iconColor = '#94a3b8', large = false }) {
   return (
-    <div className="flex-1 px-6 first:pl-0 last:pr-0">
+    <div className="md:flex-1 md:px-6 md:first:pl-0 md:last:pr-0">
       <div className="flex items-center gap-2 mb-3" style={{ color: iconColor }}>
         {icon}
         <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>
@@ -158,8 +142,8 @@ function StatBlock({ icon, label, value, sub, legRecord, valueColor = '#f1f5f9',
 function Divider() {
   return (
     <div
-      className="self-stretch"
-      style={{ width: '1px', backgroundColor: 'rgba(255,255,255,0.06)', margin: '0 0' }}
+      className="hidden md:block self-stretch"
+      style={{ width: '1px', backgroundColor: 'rgba(255,255,255,0.06)' }}
     />
   )
 }
