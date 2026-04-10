@@ -108,7 +108,7 @@ export default function PlayoffCard({ bet, betData }) {
                     className="w-1.5 h-1.5 rounded-full"
                     style={{ backgroundColor: playoffStatus.inPosition ? '#22c55e' : '#ef4444' }}
                   />
-                  {playoffStatus.inPosition ? 'In Position' : 'Out'}
+                  {playoffStatus.inPosition ? 'In Position' : 'Out of Position'}
                 </div>
                 <p className="text-xs mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
                   {playoffStatus.label}

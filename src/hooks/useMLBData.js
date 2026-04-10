@@ -55,8 +55,9 @@ export function useMLBData() {
     if (!isNaN(wcRank) && wcRank >= 1 && wcRank <= 3) {
       return { inPosition: true, label: `Wild Card ${wcRank}`, sub: `wc ${wcRank}` }
     }
-    const out = wcGB && wcGB !== '-' ? wcGB : '?'
-    return { inPosition: false, label: `Out of Position`, sub: `${out} back` }
+    const gb = wcGB ? wcGB.replace('+', '') : null
+    const gbDisplay = gb && gb !== '-' ? `${gb} GB` : '—'
+    return { inPosition: false, label: gbDisplay }
   }
 
   const getBetData = (bet) => {

@@ -6,6 +6,7 @@ import PlayoffCard from './components/cards/PlayoffCard'
 import WinTotalCard from './components/cards/WinTotalCard'
 import DivisionCard from './components/cards/DivisionCard'
 import PastSeasons from './components/PastSeasons'
+import OverallPerformance from './components/OverallPerformance'
 
 function BetCard({ bet, betData }) {
   if (bet.type === 'playoff_qualifier') {
@@ -61,6 +62,9 @@ export default function App() {
 
         {/* Past seasons */}
         <PastSeasons seasons={PAST_SEASONS} />
+
+        {/* Overall performance */}
+        <OverallPerformance currentSeason={CURRENT_SEASON} pastSeasons={PAST_SEASONS} />
       </main>
     </div>
   )
