@@ -28,8 +28,8 @@ export const CURRENT_SEASON = {
     },
     {
       id: 'brewers',
-      person: 'Bima',
-      personColor: '#a855f7',
+      person: 'Victor',
+      personColor: '#f97316',
       team: {
         id: 158,
         name: 'Milwaukee Brewers',
@@ -59,8 +59,8 @@ export const CURRENT_SEASON = {
     },
     {
       id: 'mariners',
-      person: 'Victor',
-      personColor: '#f97316',
+      person: 'Bima',
+      personColor: '#a855f7',
       team: {
         id: 136,
         name: 'Seattle Mariners',

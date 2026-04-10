@@ -1,37 +1,22 @@
+import TeamLogo from '../TeamLogo'
+
 function TeamRow({ row, isTracked, accentColor }) {
   const abbr =
     row.team?.abbreviation ||
-    row.team?.name
-      ?.split(' ')
-      .pop()
-      .slice(0, 3)
-      .toUpperCase()
+    row.team?.name?.split(' ').pop().slice(0, 3).toUpperCase()
 
   const gb = row.gamesBack === '-' ? '—' : row.gamesBack
 
   return (
     <tr>
-      <td className="py-2 pr-2">
+      <td className="py-1.5 pr-2">
         <div className="flex items-center gap-2.5">
           {isTracked ? (
             <div className="w-0.5 h-5 rounded-full flex-shrink-0" style={{ backgroundColor: accentColor }} />
           ) : (
             <div className="w-0.5 h-5 flex-shrink-0" />
           )}
-          <div
-            className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold flex-shrink-0"
-            style={
-              isTracked
-                ? {
-                    backgroundColor: accentColor + '22',
-                    border: `1px solid ${accentColor}44`,
-                    color: accentColor,
-                  }
-                : { backgroundColor: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.35)' }
-            }
-          >
-            {abbr}
-          </div>
+          <TeamLogo teamId={row.team?.id} abbr={abbr} size={22} />
           <span
             className="text-sm leading-none"
             style={{
@@ -43,22 +28,16 @@ function TeamRow({ row, isTracked, accentColor }) {
           </span>
         </div>
       </td>
-      <td
-        className="text-sm text-right py-2 px-2 tabular-nums"
-        style={{ color: isTracked ? '#f1f5f9' : 'rgba(255,255,255,0.45)', fontWeight: isTracked ? 600 : 400 }}
-      >
+      <td className="text-sm text-right py-1.5 px-2 tabular-nums"
+        style={{ color: isTracked ? '#f1f5f9' : 'rgba(255,255,255,0.45)', fontWeight: isTracked ? 600 : 400 }}>
         {row.wins}
       </td>
-      <td
-        className="text-sm text-right py-2 px-2 tabular-nums"
-        style={{ color: isTracked ? '#f1f5f9' : 'rgba(255,255,255,0.45)', fontWeight: isTracked ? 600 : 400 }}
-      >
+      <td className="text-sm text-right py-1.5 px-2 tabular-nums"
+        style={{ color: isTracked ? '#f1f5f9' : 'rgba(255,255,255,0.45)', fontWeight: isTracked ? 600 : 400 }}>
         {row.losses}
       </td>
-      <td
-        className="text-sm text-right py-2 pl-2 tabular-nums"
-        style={{ color: isTracked ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.3)' }}
-      >
+      <td className="text-sm text-right py-1.5 pl-2 tabular-nums"
+        style={{ color: isTracked ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.3)' }}>
         {gb}
       </td>
     </tr>
@@ -71,25 +50,25 @@ export default function PlayoffCard({ bet, betData }) {
   return (
     <div
       className="rounded-2xl overflow-hidden flex flex-col"
-      style={{
-        background: '#1a2236',
-        border: '1px solid rgba(255,255,255,0.07)',
-      }}
+      style={{ background: '#1a2236', border: '1px solid rgba(255,255,255,0.07)' }}
     >
       {/* Header */}
       <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-1.5 mb-2">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: bet.personColor }} />
-              <span className="text-xs font-semibold" style={{ color: bet.personColor }}>
-                {bet.person}
-              </span>
+          <div className="flex items-center gap-3">
+            <TeamLogo teamId={bet.team.id} abbr={bet.team.abbr} size={40} />
+            <div>
+              <div className="flex items-center gap-1.5 mb-1">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: bet.personColor }} />
+                <span className="text-xs font-semibold" style={{ color: bet.personColor }}>
+                  {bet.person}
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white leading-tight">{bet.team.name}</h3>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                {bet.team.divisionName} · {bet.description}
+              </p>
             </div>
-            <h3 className="text-base font-bold text-white leading-tight">{bet.team.name}</h3>
-            <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              {bet.team.divisionName} · {bet.description}
-            </p>
           </div>
 
           {/* Status badge */}
@@ -104,10 +83,8 @@ export default function PlayoffCard({ bet, betData }) {
                       : { backgroundColor: 'rgba(239,68,68,0.12)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.25)' }
                   }
                 >
-                  <div
-                    className="w-1.5 h-1.5 rounded-full"
-                    style={{ backgroundColor: playoffStatus.inPosition ? '#22c55e' : '#ef4444' }}
-                  />
+                  <div className="w-1.5 h-1.5 rounded-full"
+                    style={{ backgroundColor: playoffStatus.inPosition ? '#22c55e' : '#ef4444' }} />
                   {playoffStatus.inPosition ? 'In Position' : 'Out of Position'}
                 </div>
                 <p className="text-xs mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
@@ -123,10 +100,8 @@ export default function PlayoffCard({ bet, betData }) {
 
       {/* Standings */}
       <div className="px-5 py-4 flex-1">
-        <p
-          className="text-[10px] font-semibold uppercase tracking-widest mb-3"
-          style={{ color: 'rgba(255,255,255,0.25)' }}
-        >
+        <p className="text-[10px] font-semibold uppercase tracking-widest mb-3"
+          style={{ color: 'rgba(255,255,255,0.25)' }}>
           {bet.team.divisionName} Standings
         </p>
 
@@ -134,18 +109,10 @@ export default function PlayoffCard({ bet, betData }) {
           <table className="w-full border-separate" style={{ borderSpacing: 0 }}>
             <thead>
               <tr>
-                <th className="text-left pb-2 text-[10px] font-medium" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                  Team
-                </th>
-                <th className="text-right pb-2 text-[10px] font-medium w-8" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                  W
-                </th>
-                <th className="text-right pb-2 text-[10px] font-medium w-8" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                  L
-                </th>
-                <th className="text-right pb-2 text-[10px] font-medium w-10" style={{ color: 'rgba(255,255,255,0.2)' }}>
-                  GB
-                </th>
+                <th className="text-left pb-2 text-[10px] font-medium" style={{ color: 'rgba(255,255,255,0.2)' }}>Team</th>
+                <th className="text-right pb-2 text-[10px] font-medium w-8" style={{ color: 'rgba(255,255,255,0.2)' }}>W</th>
+                <th className="text-right pb-2 text-[10px] font-medium w-8" style={{ color: 'rgba(255,255,255,0.2)' }}>L</th>
+                <th className="text-right pb-2 text-[10px] font-medium w-10" style={{ color: 'rgba(255,255,255,0.2)' }}>GB</th>
               </tr>
             </thead>
             <tbody>
@@ -160,20 +127,16 @@ export default function PlayoffCard({ bet, betData }) {
             </tbody>
           </table>
         ) : (
-          <div
-            className="h-28 flex items-center justify-center text-xs rounded-lg"
-            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}
-          >
+          <div className="h-28 flex items-center justify-center text-xs rounded-lg"
+            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
             Loading standings...
           </div>
         )}
       </div>
 
       {/* Footer */}
-      <div
-        className="px-5 py-3 flex items-center justify-between text-xs"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.25)' }}
-      >
+      <div className="px-5 py-3 flex items-center justify-between text-xs"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.25)' }}>
         <span>{teamRecord ? `${wins}–${losses}` : '—'}</span>
         <span>{gamesRemaining != null ? `${gamesRemaining} games remaining` : ''}</span>
       </div>

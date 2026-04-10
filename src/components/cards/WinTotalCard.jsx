@@ -1,3 +1,5 @@
+import TeamLogo from '../TeamLogo'
+
 const RADIUS = 52
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
@@ -50,17 +52,20 @@ export default function WinTotalCard({ bet, betData }) {
       {/* Header */}
       <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-1.5 mb-2">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: bet.personColor }} />
-              <span className="text-xs font-semibold" style={{ color: bet.personColor }}>
-                {bet.person}
-              </span>
+          <div className="flex items-center gap-3">
+            <TeamLogo teamId={bet.team.id} abbr={bet.team.abbr} size={40} />
+            <div>
+              <div className="flex items-center gap-1.5 mb-1">
+                <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: bet.personColor }} />
+                <span className="text-xs font-semibold" style={{ color: bet.personColor }}>
+                  {bet.person}
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-white leading-tight">{bet.team.name}</h3>
+              <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                {bet.team.divisionName} · {bet.description}
+              </p>
             </div>
-            <h3 className="text-base font-bold text-white leading-tight">{bet.team.name}</h3>
-            <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              {bet.team.divisionName} · {bet.description}
-            </p>
           </div>
 
           {/* Status badge */}
