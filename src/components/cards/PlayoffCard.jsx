@@ -126,11 +126,6 @@ export default function PlayoffCard({ bet, betData, sport }) {
               ))}
             </tbody>
           </table>
-        ) : sport === 'NFL' ? (
-          <div className="h-28 flex items-center justify-center text-xs rounded-lg"
-            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
-            No live tracking · NFL season in progress
-          </div>
         ) : (
           <div className="h-28 flex items-center justify-center text-xs rounded-lg"
             style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}>

@@ -129,13 +129,6 @@ export default function WinTotalCard({ bet, betData, sport }) {
               <MiniStat label="Remaining" value={gamesRemaining} />
             </div>
           </>
-        ) : sport === 'NFL' ? (
-          <div
-            className="h-28 w-full mx-5 flex items-center justify-center text-xs rounded-lg"
-            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}
-          >
-            No live tracking · NFL season in progress
-          </div>
         ) : (
           <div
             className="h-28 w-full mx-5 flex items-center justify-center text-xs rounded-lg"

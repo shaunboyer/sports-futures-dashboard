@@ -54,6 +54,7 @@ export function useNFLData() {
       setLastUpdated(new Date())
       setError(null)
     } catch (err) {
+      console.error('[useNFLData] fetch failed:', err)
       setError(err.message)
     } finally {
       setLoading(false)
