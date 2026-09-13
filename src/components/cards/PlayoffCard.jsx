@@ -137,7 +137,7 @@ export default function PlayoffCard({ bet, betData, sport }) {
       {/* Footer */}
       <div className="px-5 py-3 flex items-center justify-between text-xs"
         style={{ borderTop: '1px solid rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.25)' }}>
-        <span>{teamRecord ? `${wins}–${losses}` : '—'}</span>
+        <span>{`${wins ?? 0}–${losses ?? 0}`}</span>
         <span>{gamesRemaining != null ? `${gamesRemaining} games remaining` : ''}</span>
       </div>
     </div>
