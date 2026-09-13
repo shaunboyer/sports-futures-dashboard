@@ -35,7 +35,7 @@ function RingChart({ pct, color }) {
   )
 }
 
-export default function WinTotalCard({ bet, betData }) {
+export default function WinTotalCard({ bet, betData, sport }) {
   const { wins, losses, gamesRemaining, target, pace, winsNeeded, onPace, pct } = betData || {}
 
   const statusColor = onPace === null ? '#94a3b8' : onPace ? '#22c55e' : '#ef4444'
@@ -120,6 +120,13 @@ export default function WinTotalCard({ bet, betData }) {
               <MiniStat label="Remaining" value={gamesRemaining} />
             </div>
           </>
+        ) : sport === 'NFL' ? (
+          <div
+            className="h-28 w-full mx-5 flex items-center justify-center text-xs rounded-lg"
+            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}
+          >
+            No live tracking · NFL season in progress
+          </div>
         ) : (
           <div
             className="h-28 w-full mx-5 flex items-center justify-center text-xs rounded-lg"
@@ -132,30 +139,34 @@ export default function WinTotalCard({ bet, betData }) {
 
       {/* Progress bar */}
       <div className="px-5 pb-5">
-        <div className="flex items-center justify-between text-[10px] mb-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
-          <span>0</span>
-          <span>Target: {target} wins</span>
-          <span>162</span>
-        </div>
-        <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
-          <div
-            className="h-full rounded-full transition-all duration-700"
-            style={{
-              width: `${((wins ?? 0) / 162) * 100}%`,
-              backgroundColor: ringColor,
-            }}
-          />
-        </div>
-        {/* Target marker */}
-        <div className="relative h-2">
-          <div
-            className="absolute top-0 w-px h-2"
-            style={{
-              left: `${(target / 162) * 100}%`,
-              backgroundColor: 'rgba(255,255,255,0.3)',
-            }}
-          />
-        </div>
+        {sport !== 'NFL' && (
+          <>
+            <div className="flex items-center justify-between text-[10px] mb-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              <span>0</span>
+              <span>{bet.under ? `Target: ${bet.description}` : `Target: ${bet.target} wins`}</span>
+              <span>162</span>
+            </div>
+            <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${((wins ?? 0) / 162) * 100}%`,
+                  backgroundColor: ringColor,
+                }}
+              />
+            </div>
+            {/* Target marker */}
+            <div className="relative h-2">
+              <div
+                className="absolute top-0 w-px h-2"
+                style={{
+                  left: `${(bet.target / 162) * 100}%`,
+                  backgroundColor: 'rgba(255,255,255,0.3)',
+                }}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useMLBData } from './hooks/useMLBData'
-import { CURRENT_SEASON, PAST_SEASONS } from './data/seasons'
+import { ACTIVE_SEASONS, PAST_SEASONS } from './data/seasons'
 import Header from './components/Header'
 import PlayoffCard from './components/cards/PlayoffCard'
 import WinTotalCard from './components/cards/WinTotalCard'
@@ -8,15 +8,15 @@ import PastSeasons from './components/PastSeasons'
 import OverallPerformance from './components/OverallPerformance'
 import { Zap } from 'lucide-react'
 
-function BetCard({ bet, betData }) {
-  if (bet.type === 'playoff_qualifier') {
-    return <PlayoffCard bet={bet} betData={betData} />
+function BetCard({ bet, betData, sport }) {
+  if (bet.type === 'playoff_qualifier' || bet.type === 'miss_playoffs') {
+    return <PlayoffCard bet={bet} betData={betData} sport={sport} />
   }
   if (bet.type === 'win_total') {
-    return <WinTotalCard bet={bet} betData={betData} />
+    return <WinTotalCard bet={bet} betData={betData} sport={sport} />
   }
   if (bet.type === 'division_winner') {
-    return <DivisionCard bet={bet} betData={betData} />
+    return <DivisionCard bet={bet} betData={betData} sport={sport} />
   }
   return null
 }
@@ -94,30 +94,32 @@ export default function App() {
         )}
 
         {/* Overall performance */}
-        <OverallPerformance currentSeason={CURRENT_SEASON} pastSeasons={PAST_SEASONS} />
+        <OverallPerformance activeSeasons={ACTIVE_SEASONS} pastSeasons={PAST_SEASONS} />
 
-        {/* Active parlay — encompassing card */}
+        {/* Active parlays — one card per season */}
         <div className="mt-10">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-white">Active Parlay</h2>
+            <h2 className="text-lg font-bold text-white">Active Parlays</h2>
             <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
               4-leg parlay · all legs must hit
             </span>
           </div>
 
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{
-              background: '#111827',
-              border: '1px solid rgba(255,255,255,0.09)',
-            }}
-          >
-            <ParlayHeader season={CURRENT_SEASON} />
-            <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-              {CURRENT_SEASON.bets.map((bet) => (
-                <BetCard key={bet.id} bet={bet} betData={getBetData(bet)} />
-              ))}
-            </div>
+          <div className="flex flex-col gap-6">
+            {ACTIVE_SEASONS.map((season) => (
+              <div
+                key={season.id}
+                className="rounded-2xl overflow-hidden"
+                style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.09)' }}
+              >
+                <ParlayHeader season={season} />
+                <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                  {season.bets.map((bet) => (
+                    <BetCard key={bet.id} bet={bet} betData={getBetData(bet)} sport={season.sport} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

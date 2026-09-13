@@ -1,4 +1,4 @@
-export const CURRENT_SEASON = {
+const MLB_2026 = {
   id: 'mlb-2026',
   label: 'MLB 2026',
   sport: 'MLB',
@@ -74,6 +74,58 @@ export const CURRENT_SEASON = {
     },
   ],
 }
+
+const NFL_2026 = {
+  id: 'nfl-2026',
+  label: 'NFL 2026',
+  sport: 'NFL',
+  year: 2026,
+  active: true,
+  parlay: {
+    odds: '+500',
+    wagered: 400,
+    toWin: 2003.13,
+    totalPayout: 2403.13,
+  },
+  bets: [
+    {
+      id: 'bills',
+      person: 'Shaun',
+      personColor: '#4f7ef8',
+      team: { name: 'Buffalo Bills', abbr: 'BUF', divisionName: 'AFC East' },
+      type: 'division_winner',
+      description: 'Win AFC East',
+    },
+    {
+      id: 'texans',
+      person: 'Victor',
+      personColor: '#f97316',
+      team: { name: 'Houston Texans', abbr: 'HOU', divisionName: 'AFC South' },
+      type: 'playoff_qualifier',
+      description: 'Make the Playoffs',
+    },
+    {
+      id: 'steelers',
+      person: 'Bima',
+      personColor: '#a855f7',
+      team: { name: 'Pittsburgh Steelers', abbr: 'PIT', divisionName: 'AFC North' },
+      type: 'win_total',
+      under: true,
+      target: 8,
+      description: 'Under 8.5 Wins',
+    },
+    {
+      id: 'colts',
+      person: 'Paul',
+      personColor: '#10b981',
+      team: { name: 'Indianapolis Colts', abbr: 'IND', divisionName: 'AFC South' },
+      type: 'miss_playoffs',
+      description: 'Miss the Playoffs',
+    },
+  ],
+}
+
+export const ACTIVE_SEASONS = [MLB_2026, NFL_2026]
 
 export const PAST_SEASONS = [
   {

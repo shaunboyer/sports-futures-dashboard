@@ -1,8 +1,8 @@
 import { TrendingUp, DollarSign, Target, Award } from 'lucide-react'
 
-function calcStats(currentSeason, pastSeasons) {
+function calcStats(activeSeasons, pastSeasons) {
   const allSeasons = [
-    { ...currentSeason, result: 'active' },
+    ...activeSeasons.map((s) => ({ ...s, result: 'active' })),
     ...pastSeasons,
   ]
 
@@ -41,11 +41,12 @@ function calcStats(currentSeason, pastSeasons) {
   return { totalWagered, totalReturned, netPL, wins, losses, active, roi, legWins, legLosses }
 }
 
-export default function OverallPerformance({ currentSeason, pastSeasons }) {
+export default function OverallPerformance({ activeSeasons, pastSeasons }) {
   const { totalWagered, totalReturned, netPL, wins, losses, active, roi, legWins, legLosses } = calcStats(
-    currentSeason,
+    activeSeasons,
     pastSeasons
   )
+  const activeWagered = activeSeasons.reduce((sum, s) => sum + s.parlay.wagered, 0)
 
   const isPositive = netPL >= 0
 
@@ -82,7 +83,7 @@ export default function OverallPerformance({ currentSeason, pastSeasons }) {
             icon={<DollarSign size={15} />}
             label="Total Wagered"
             value={`$${totalWagered.toLocaleString()}`}
-            sub={active > 0 ? `$${currentSeason.parlay.wagered} active` : null}
+            sub={active > 0 ? `$${activeWagered.toLocaleString()} active` : null}
             iconColor="#94a3b8"
           />
           <Divider />

@@ -44,7 +44,7 @@ function TeamRow({ row, isTracked, accentColor }) {
   )
 }
 
-export default function DivisionCard({ bet, betData }) {
+export default function DivisionCard({ bet, betData, sport }) {
   const { teamRecord, divStandings, wins, losses, gamesRemaining, divRank, gamesBack, inFirst } = betData || {}
 
   return (
@@ -126,6 +126,11 @@ export default function DivisionCard({ bet, betData }) {
               ))}
             </tbody>
           </table>
+        ) : sport === 'NFL' ? (
+          <div className="h-28 flex items-center justify-center text-xs rounded-lg"
+            style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
+            No live tracking · NFL season in progress
+          </div>
         ) : (
           <div className="h-28 flex items-center justify-center text-xs rounded-lg"
             style={{ color: 'rgba(255,255,255,0.2)', backgroundColor: 'rgba(255,255,255,0.02)' }}>
