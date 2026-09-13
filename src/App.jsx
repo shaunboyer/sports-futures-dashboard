@@ -1,4 +1,5 @@
 import { useMLBData } from './hooks/useMLBData'
+import { useNFLData } from './hooks/useNFLData'
 import { ACTIVE_SEASONS, PAST_SEASONS } from './data/seasons'
 import Header from './components/Header'
 import PlayoffCard from './components/cards/PlayoffCard'
@@ -72,6 +73,10 @@ function FinStat({ label, value, color = '#f1f5f9', bold = false }) {
 
 export default function App() {
   const { loading, error, lastUpdated, refresh, getBetData } = useMLBData()
+  const { getNFLBetData } = useNFLData()
+
+  const getDataFn = (season) =>
+    season.sport === 'NFL' ? getNFLBetData : getBetData
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0d1117' }}>
@@ -115,7 +120,7 @@ export default function App() {
                 <ParlayHeader season={season} />
                 <div className="p-4 md:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                   {season.bets.map((bet) => (
-                    <BetCard key={bet.id} bet={bet} betData={getBetData(bet)} sport={season.sport} />
+                    <BetCard key={bet.id} bet={bet} betData={getDataFn(season)(bet)} sport={season.sport} />
                   ))}
                 </div>
               </div>

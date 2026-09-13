@@ -16,7 +16,7 @@ function TeamRow({ row, isTracked, accentColor }) {
           ) : (
             <div className="w-0.5 h-5 flex-shrink-0" />
           )}
-          <TeamLogo teamId={row.team?.id} abbr={abbr} size={22} />
+          <TeamLogo teamId={row.team?.id} abbr={abbr} logoUrl={row.logoUrl} size={22} />
           <span
             className="text-sm leading-none"
             style={{

@@ -36,7 +36,8 @@ function RingChart({ pct, color }) {
 }
 
 export default function WinTotalCard({ bet, betData, sport }) {
-  const { wins, losses, gamesRemaining, target, pace, winsNeeded, onPace, pct } = betData || {}
+  const { wins, losses, gamesRemaining, target, pace, winsNeeded, onPace, pct, nflGames } = betData || {}
+  const maxGames = nflGames || 162
 
   const statusColor = onPace === null ? '#94a3b8' : onPace ? '#22c55e' : '#ef4444'
   const ringColor = onPace === null ? 'rgba(255,255,255,0.15)' : onPace ? '#22c55e' : '#ef4444'
@@ -81,7 +82,7 @@ export default function WinTotalCard({ bet, betData, sport }) {
                   }
                 >
                   <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: statusColor }} />
-                  {onPace ? 'On Pace' : 'Behind Pace'}
+                  {bet.under ? (onPace ? 'On Pace' : 'At Risk') : (onPace ? 'On Pace' : 'Behind Pace')}
                 </div>
                 {pace !== null && (
                   <p className="text-xs mt-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
@@ -106,7 +107,7 @@ export default function WinTotalCard({ bet, betData, sport }) {
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-3xl font-bold text-white tabular-nums">{wins}</span>
                 <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                  of {target} wins
+                  {bet.under ? `limit: ${bet.target + 0.5}` : `of ${target} wins`}
                 </span>
               </div>
             </div>
@@ -115,7 +116,15 @@ export default function WinTotalCard({ bet, betData, sport }) {
             <div className="flex items-center gap-6">
               <MiniStat label="W–L" value={`${wins}–${losses}`} />
               <div style={{ width: 1, height: 28, backgroundColor: 'rgba(255,255,255,0.06)' }} />
-              <MiniStat label="Needed" value={winsNeeded > 0 ? winsNeeded : '✓'} color={winsNeeded === 0 ? '#22c55e' : '#f1f5f9'} />
+              {bet.under ? (
+                <MiniStat
+                  label="Budget"
+                  value={wins <= bet.target ? bet.target - wins : '✗'}
+                  color={wins <= bet.target ? '#f1f5f9' : '#ef4444'}
+                />
+              ) : (
+                <MiniStat label="Needed" value={winsNeeded > 0 ? winsNeeded : '✓'} color={winsNeeded === 0 ? '#22c55e' : '#f1f5f9'} />
+              )}
               <div style={{ width: 1, height: 28, backgroundColor: 'rgba(255,255,255,0.06)' }} />
               <MiniStat label="Remaining" value={gamesRemaining} />
             </div>
@@ -143,14 +152,14 @@ export default function WinTotalCard({ bet, betData, sport }) {
           <>
             <div className="flex items-center justify-between text-[10px] mb-1.5" style={{ color: 'rgba(255,255,255,0.3)' }}>
               <span>0</span>
-              <span>{bet.under ? `Target: ${bet.description}` : `Target: ${bet.target} wins`}</span>
-              <span>162</span>
+              <span>{bet.under ? `Limit: ${bet.description}` : `Target: ${bet.target} wins`}</span>
+              <span>{maxGames}</span>
             </div>
             <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.06)' }}>
               <div
                 className="h-full rounded-full transition-all duration-700"
                 style={{
-                  width: `${((wins ?? 0) / 162) * 100}%`,
+                  width: `${((wins ?? 0) / maxGames) * 100}%`,
                   backgroundColor: ringColor,
                 }}
               />
@@ -160,7 +169,7 @@ export default function WinTotalCard({ bet, betData, sport }) {
               <div
                 className="absolute top-0 w-px h-2"
                 style={{
-                  left: `${(bet.target / 162) * 100}%`,
+                  left: `${(bet.target / maxGames) * 100}%`,
                   backgroundColor: 'rgba(255,255,255,0.3)',
                 }}
               />

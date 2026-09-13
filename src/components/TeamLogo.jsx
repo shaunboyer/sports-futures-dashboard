@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { getLogoUrl } from '../utils/teamLogos'
 
-export default function TeamLogo({ teamId, abbr, size = 24, className = '' }) {
+export default function TeamLogo({ teamId, abbr, logoUrl: overrideUrl, size = 24, className = '' }) {
   const [failed, setFailed] = useState(false)
-  const url = getLogoUrl(teamId)
+  const url = overrideUrl || getLogoUrl(teamId)
 
   if (!url || failed) {
     // Fallback: letter badge
