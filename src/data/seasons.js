@@ -134,7 +134,58 @@ const NFL_2026 = {
   ],
 }
 
-export const ACTIVE_SEASONS = [NFL_2026]
+const NBA_2026 = {
+  id: 'nba-2026',
+  label: 'NBA 2026–27',
+  sport: 'NBA',
+  year: 2026,
+  active: true,
+  parlay: {
+    odds: '+1569',
+    wagered: 200,
+    toWin: 3138.43,
+    totalPayout: 3338.43,
+  },
+  bets: [
+    {
+      id: 'warriors',
+      person: 'Shaun',
+      personColor: '#4f7ef8',
+      team: { name: 'Golden State Warriors', abbr: 'GS', divisionName: 'Pacific', espnId: 9 },
+      type: 'playoff_qualifier',
+      description: 'Make the Playoffs',
+    },
+    {
+      id: 'lakers',
+      person: 'Victor',
+      personColor: '#f97316',
+      team: { name: 'Los Angeles Lakers', abbr: 'LAL', divisionName: 'Pacific', espnId: 13 },
+      type: 'win_total',
+      target: 46,
+      description: 'Over 45.5 Wins',
+    },
+    {
+      id: 'heat',
+      person: 'Paul',
+      personColor: '#10b981',
+      team: { name: 'Miami Heat', abbr: 'MIA', divisionName: 'Southeast', espnId: 14 },
+      type: 'win_total',
+      target: 47,
+      description: 'Over 46.5 Wins',
+    },
+    {
+      id: 'sixers',
+      person: 'Bima',
+      personColor: '#a855f7',
+      team: { name: 'Philadelphia 76ers', abbr: 'PHI', divisionName: 'Atlantic', espnId: 20 },
+      type: 'win_total',
+      target: 50,
+      description: 'Over 49.5 Wins',
+    },
+  ],
+}
+
+export const ACTIVE_SEASONS = [NFL_2026, NBA_2026]
 
 export const PAST_SEASONS = [
   MLB_2026,

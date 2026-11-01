@@ -1,5 +1,6 @@
 import { useMLBData } from './hooks/useMLBData'
 import { useNFLData } from './hooks/useNFLData'
+import { useNBAData } from './hooks/useNBAData'
 import { ACTIVE_SEASONS, PAST_SEASONS } from './data/seasons'
 import Header from './components/Header'
 import PlayoffCard from './components/cards/PlayoffCard'
@@ -74,9 +75,10 @@ function FinStat({ label, value, color = '#f1f5f9', bold = false }) {
 export default function App() {
   const { loading, error, lastUpdated, refresh, getBetData } = useMLBData()
   const { getNFLBetData } = useNFLData()
+  const { getNBABetData } = useNBAData()
 
   const getDataFn = (season) =>
-    season.sport === 'NFL' ? getNFLBetData : getBetData
+    season.sport === 'NFL' ? getNFLBetData : season.sport === 'NBA' ? getNBABetData : getBetData
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0d1117' }}>
