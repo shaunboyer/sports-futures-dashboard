@@ -68,9 +68,11 @@ function PastSeasonCard({ season }) {
           {/* Result badge */}
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <p className="text-xs mb-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>Payout</p>
+              <p className="text-xs mb-0.5" style={{ color: 'rgba(255,255,255,0.3)' }}>Net</p>
               <p className="text-lg font-bold" style={{ color: won ? '#22c55e' : '#ef4444' }}>
-                ${season.parlay.totalPayout.toLocaleString()}
+                {won
+                  ? `+$${season.parlay.toWin.toLocaleString()}`
+                  : `−$${season.parlay.wagered.toLocaleString()}`}
               </p>
             </div>
             <div
@@ -88,12 +90,17 @@ function PastSeasonCard({ season }) {
         </div>
 
         {/* Financial details */}
-        <div className="flex items-center gap-6 mt-3">
+        <div className="flex items-center flex-wrap gap-x-6 gap-y-1 mt-3">
           <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
             {season.parlay.odds} odds
           </span>
           <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            ${season.parlay.wagered} wagered
+            ${season.parlay.wagered.toLocaleString()} wagered
+          </span>
+          <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            {won
+              ? `$${season.parlay.totalPayout.toLocaleString()} paid out`
+              : `$0 paid out (would have paid $${season.parlay.totalPayout.toLocaleString()})`}
           </span>
           <span className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
             {hitCount}/{season.bets.length} legs hit

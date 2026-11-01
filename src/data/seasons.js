@@ -3,7 +3,8 @@ const MLB_2026 = {
   label: 'MLB 2026',
   sport: 'MLB',
   year: 2026,
-  active: true,
+  active: false,
+  result: 'lost',
   parlay: {
     odds: '+971',
     wagered: 400,
@@ -25,6 +26,8 @@ const MLB_2026 = {
       },
       type: 'playoff_qualifier',
       description: 'Make the Playoffs',
+      result: 'miss',
+      resultNote: '76–86, missed playoffs',
     },
     {
       id: 'brewers',
@@ -40,6 +43,8 @@ const MLB_2026 = {
       },
       type: 'playoff_qualifier',
       description: 'Make the Playoffs',
+      result: 'hit',
+      resultNote: '103–59, won NL Central',
     },
     {
       id: 'giants',
@@ -56,6 +61,8 @@ const MLB_2026 = {
       type: 'win_total',
       description: '80+ Wins',
       target: 80,
+      result: 'miss',
+      resultNote: '65–97',
     },
     {
       id: 'mariners',
@@ -71,6 +78,8 @@ const MLB_2026 = {
       },
       type: 'division_winner',
       description: 'Win the AL West',
+      result: 'miss',
+      resultNote: '76–86, 3rd in AL West',
     },
   ],
 }
@@ -125,9 +134,10 @@ const NFL_2026 = {
   ],
 }
 
-export const ACTIVE_SEASONS = [MLB_2026, NFL_2026]
+export const ACTIVE_SEASONS = [NFL_2026]
 
 export const PAST_SEASONS = [
+  MLB_2026,
   {
     id: 'nfl-2025',
     label: 'NFL 2025',
