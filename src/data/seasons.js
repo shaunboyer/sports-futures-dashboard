@@ -86,7 +86,7 @@ const MLB_2026 = {
 
 const NFL_2026 = {
   id: 'nfl-2026',
-  label: 'NFL 2026',
+  label: 'NFL 2026–27',
   sport: 'NFL',
   year: 2026,
   active: true,
@@ -191,7 +191,7 @@ export const PAST_SEASONS = [
   MLB_2026,
   {
     id: 'nfl-2025',
-    label: 'NFL 2025',
+    label: 'NFL 2025–26',
     sport: 'NFL',
     year: 2025,
     active: false,

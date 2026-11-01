@@ -59,7 +59,7 @@ function PastSeasonCard({ season }) {
                 className="text-[10px] font-semibold uppercase tracking-widest"
                 style={{ color: 'rgba(255,255,255,0.3)' }}
               >
-                {season.sport} · {season.year}
+                {season.sport} · {season.label.replace(`${season.sport} `, '')}
               </span>
             </div>
             <h3 className="text-base font-bold text-white">{season.label} Season</h3>
